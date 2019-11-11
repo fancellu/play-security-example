@@ -18,7 +18,7 @@ GET         /basic                controllers.HomeController.basic
 ### (name is admin2, password is password2)
 GET         /basic2               controllers.HomeController.basic2
 
-### Form based login (name is admin, password is admin)
+### Form based login (name is admin, password is password)
 
 GET         /login                controllers.LoginController.login
 
