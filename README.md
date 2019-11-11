@@ -13,9 +13,9 @@ GET         /                     controllers.HomeController.index
 ### https://en.wikipedia.org/wiki/Basic_access_authentication
 ### https://tools.ietf.org/html/rfc7235#section-3.1
 
-### (name is admin, password is admin)
+### (name is admin, password is password)
 GET         /basic                controllers.HomeController.basic
-### (name is admin, password is admin)
+### (name is admin2, password is password2)
 GET         /basic2               controllers.HomeController.basic2
 
 ### Form based login (name is admin, password is admin)

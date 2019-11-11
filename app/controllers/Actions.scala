@@ -9,22 +9,6 @@ import play.api.mvc._
 
 import scala.concurrent.{ExecutionContext, Future}
 
-@Singleton
-class Actions @Inject()() {
-  def BasicSecuredAsync[A](username: String, password: String)(action: Action[A]): Action[A] = Action.async(action.parser) { implicit request =>
-    val submittedCredentials: Option[List[String]] = for {
-      authHeader <- request.headers.get("Authorization")
-      parts <- authHeader.split(' ').drop(1).headOption
-    } yield new String(Base64.getDecoder.decode(parts)).split(':').toList
-
-    submittedCredentials.collect {
-      case `username` :: `password` :: Nil =>action(request)
-    }.getOrElse {
-      Future.successful(Unauthorized(views.html.defaultpages.unauthorized()).withHeaders("WWW-Authenticate" -> """Basic realm="Secured Area""""))
-    }
-  }
-}
-
 class UserRequest[A](val username: Option[String], request: Request[A]) extends WrappedRequest[A](request)
 
 class UserRequestAction @Inject()(val parser: BodyParsers.Default)(implicit val executionContext: ExecutionContext)
