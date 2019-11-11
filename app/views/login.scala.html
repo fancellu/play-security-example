@@ -1,0 +1,60 @@
+@(
+        form: Form[models.User],
+        postUrl: Call
+)(implicit request: MessagesRequestHeader, flash: Flash)
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    </head>
+
+    <body>
+        <div>
+            <div>
+
+                <h1>Login</h1>
+
+                @flash.data.map{ case (name, value) =>
+                    <div>@name: @value</div>
+                }
+
+                @if(form.hasGlobalErrors) {
+                    @form.globalErrors.map { error: FormError =>
+                        <div>
+                            Error: @error.key: @error.message
+                        </div>
+                    }
+                }
+
+                @helper.form(postUrl, Symbol("id") -> "user-login-form") {
+
+                    @helper.CSRF.formField
+
+                    @helper.inputText(
+                        form("username"),
+                        Symbol("_label") -> "Username",
+                        Symbol("placeholder") -> "username",
+                        Symbol("id") -> "username",
+                        Symbol("size") -> 30,
+                        Symbol("_showConstraints") -> false
+                    )
+
+                    @helper.inputPassword(
+                        form("password"),
+                        Symbol("_label") -> "Password",
+                        Symbol("placeholder") -> "password",
+                        Symbol("id") -> "password",
+                        Symbol("size") -> 30,
+                        Symbol("_showConstraints") -> false
+                    )
+
+                    <button>Login</button>
+                }
+            </div>
+        </div>
+    </body>
+</html>
+
+

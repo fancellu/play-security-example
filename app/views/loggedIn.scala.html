@@ -1,0 +1,11 @@
+@(logoutUrl: Call, message: String="")(implicit flash: Flash)
+
+@main("You are logged in") {
+    <h1>Logged in @message</h1>
+
+    @flash.get("info").getOrElse("")
+
+    <div>
+        <a href="@logoutUrl">logout</a>
+    </div>
+}
