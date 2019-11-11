@@ -21,9 +21,14 @@ GET         /basic2               controllers.HomeController.basic2
 ### Form based login (name is admin, password is admin)
 
 GET         /login                controllers.LoginController.login
+
 POST        /login                controllers.LoginController.tryLogin
+
 GET         /logout               controllers.LoginController.logout
 
+
 GET         /loggedin             controllers.LoginController.loggedIn
+
 GET         /loggedin2            controllers.LoginController.loggedIn2
+
 GET         /maybeloggedin        controllers.LoginController.maybeLoggedIn
